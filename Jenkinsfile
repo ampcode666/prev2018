@@ -1,9 +1,18 @@
 pipeline {
   agent any
   stages {
-    stage('') {
+    stage('error') {
       steps {
-        build 'mvn'
+        parallel(
+          "error": {
+            build 'mvn'
+            
+          },
+          "": {
+            timeout(time: 12)
+            
+          }
+        )
       }
     }
   }
